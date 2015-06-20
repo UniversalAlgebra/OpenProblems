@@ -3,13 +3,18 @@
 This repository collects lists of open problems in universal algebra and related
 areas. **Contributors welcome!**
 
-If you would like to contribute to this repository, or make additions or
-revisions to the existing files, the best way is to fork the repository to
-your own GitHub account and the submit a pull request.
-Detailed instructions for doing this are given below.  However, if this all seems
-like too much work, feel free to simply post a message on the [Wiki pages] of
-this repository or
-[open a new issue](https://github.com/UniversalAlgebra/OpenProblems/issues).
+If you would like to contribute and make additions or
+revisions to the files in this repository, the best way is to
+[fork](https://help.github.com/articles/fork-a-repo/)
+the repo to your own GitHub account and then
+submit a [pull request](https://help.github.com/articles/creating-a-pull-request/).
+
+If you don't know what the last sentence means, don't worry---there are detailed
+instructions below.  But if this all seems too complicated, feel free to simply
+post a message on the
+[Wiki pages](https://github.com/UniversalAlgebra/OpenProblems/wiki), or
+[open a new issue](https://github.com/UniversalAlgebra/OpenProblems/issues), or
+[send email](mailto:williamdemeo@gmail.com).
 
 ### Contributing using fork and pull requests
 
