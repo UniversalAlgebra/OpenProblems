@@ -1,0 +1,671 @@
+\begin{filecontents*}{citations.bib}
+@article {mckenzie-residual-bounds,
+     AUTHOR = {McKenzie, Ralph},
+     TITLE = {The residual bounds of finite algebras},
+     JOURNAL = {International Journal of Algebra and Computation},
+    VOLUME = {6},
+   YEAR = {1996},
+   NUMBER = {1},
+   PAGES = {1--28},
+   ISSN = {0218-1967},
+   note =  {doi: 10.1142/S0218196796000027},
+   URL =  {http://dx.doi.org/10.1142/S0218196796000027},
+}
+@article{haddad,
+  year={1990},
+  issn={0002-5240},
+  journal={Algebra Universalis},
+  volume={27},
+  number={2},
+  doi={10.1007/BF01182451},
+  title={Intersections of finitely generated clones},
+  url={http://dx.doi.org/10.1007/BF01182451},
+  publisher={Birkhäuser-Verlag},
+  author={Haddad, Lucien},
+  pages={171-179},
+  language={English}
+}
+@ARTICLE{tardos,
+   author={G\'abor Tard\H{o}s},
+  title="A maximal clone of monotone operations which in nonfinitely
+    generated",
+  journal="Order",
+  volume="3",
+  year="1986",
+  pages="211-218"
+}
+@article{freese-valeriote-complexity,
+  author="Matthew A. Valeriote and Ralph Freese",
+  title="On the complexity of some {M}altsev conditions",
+  journal="International Journal of Algebra and Computation",
+  year="2009",
+  volume="19",
+  number="2",
+  pages="451-464",
+  doi="10.1142/S0218196709004956",
+  issn="1793-6500"
+}
+@article{nebojsa,
+  author="Nebojsa Mudrinski",
+  title="2-Supernilpotent {M}al'cev algebras",
+  journal="Monatshefte Fur  Mathematik",
+  year="2013",
+    issue="2",
+    volume="172",
+    pages="161--166",
+   note="doi:10.1007/s00605-013-0541-y"
+}
+@INPROCEEDINGS{bulatov-on-the-number-of-maltsevs,
+  author="Andrei Bulatov",
+  title="On the number of finite {M}al'tsev algebras",
+  booktitle="Proceedings of the Dresden Conference 2000 (AAA 60) and the Summer School
+    1999 (Contr. Gen. Alg.)",
+  pages="41–54",
+  publisher="Verlag Johannes Heyn", 
+  year="2001",
+  url="https://www.cs.sfu.ca/~abulatov/papers/CGA13.ps"
+}
+@article{kearnes-szendrei-2-commutators,
+  author="Keith Kearnes and Agnes Szendrei",
+  title="The relationship between two commutators",
+  journal="International Journal of Algebra and Computation",
+  year="1998",
+  volume="8",
+  pages="497--531"
+}
+@article{hagemann-mitschke,
+  author="J. Hagemann and A.  Mitschke",
+  title="On $n$-permutable congruences",
+  journal="Algebra Universalis",
+  volume="3",
+  number="1",
+  pages="8--12",
+  year="1973"
+}
+@article{freese-mckenzie-robust,
+  author="Ralph Freese and Ralph McKenzie",
+  title="Maltsev families of varieties closed under
+   join or {M}altsev product",
+  note="preprint",
+ url="http://www.math.hawaii.edu/~ralph/Preprints/maltsev-robust.pdf"
+}
+@article{larose-zadori,
+  author="Benoit Larose and La\'szlo Z\'adori",
+  title="Algebraic properties and dismantlability of finite posets",
+  journal="Discrete Mathematics",
+  year="1997",
+  volume="163",
+  pages="89--99",
+  note="doi:10.1016/0012-365X(95)00312-K"
+}
+\end{filecontents*}
+
+\documentclass[12pt]{article} 
+\usepackage{hyperref}
+  \usepackage{tikz}
+  \usepackage[english]{babel}
+  \usepackage[utf8]{inputenc}
+  \usepackage{amsfonts,amsmath,amssymb,amsthm,enumerate,latexsym}
+
+  \let\phi\varphi
+  \def\zet{{\mathbb Z}}
+  \def\Im{\operatorname{Im}}
+  \def\equals{=}
+  \DeclareMathOperator\absorbs{\trianglelefteq}
+  \DeclareMathOperator\Gabsorbs{\trianglelefteq_G}
+  \DeclareMathOperator\Jabsorbs{\trianglelefteq_J}
+  \let\subset\subseteq
+  \def\compEXPTIME{{\textsf{EXPTIME}}}
+  \def\compNEXPTIME{{\textsf{NEXPTIME}}}
+  \def\compNP{{\textsf{NP}}}
+  \def\compP{{\textsf{P}}}
+  \def\Datalog{{\textsf{DATALOG}}}
+  \let\nicepicture\relax
+  \def\Operations{{\mathcal F}}
+  \def\algA{{\mathbf{A}}}
+  \def\algM{{\mathbf{M}}}
+  \def\algB{{\mathbf{B}}}
+  \def\algC{{\mathbf{C}}}
+  \def\A{{\mathbb{A}}}
+  \def\B{{\mathbb{B}}}
+  \newcommand\C{{\mathcal C}}
+  \newcommand\vect[1]{\mathbf {#1}}
+  \newcommand\Arrr{{\mathcal R}}
+  \newcommand\M{{\mathcal M}}
+  \newcommand\AND{\mathrel{\wedge}}
+  \newcommand\OR{\mathrel{\vee}}
+  \newcommand\True{\mathrm{True}}
+  \newcommand\en{\mathbb{N}}
+  \DeclareMathOperator\CSP{CSP}
+  \DeclareMathOperator\Sg{Sg}
+  \DeclareMathOperator\arity{arity}
+  \DeclareMathOperator\Inv{Inv}
+  \DeclareMathOperator\Pol{Pol}
+  \DeclareMathOperator\var{var}
+  \DeclareMathOperator\NU{NU}
+  \DeclareMathOperator\Con{Con}
+  \DeclareMathOperator\Clo{Clo}
+  \newcommand\SDmeet{$\operatorname{SD}(\wedge)$}
+
+  %===math symbols
+  \def\Rplus{R^{+}}
+  \def\Rminus{R^{-}}
+  \def\M{{\mathcal M}}
+  \def\CSP{\operatorname{CSP}}
+  \def\sinks{\operatorname{sinks}}
+  \def\sources{\operatorname{sources}}
+  \def\var{\operatorname{var}}
+
+
+  \theoremstyle{definition}
+
+  \newtheorem{question}{Question}
+
+  \theoremstyle{remark}
+  \newtheorem*{context}{Context}
+
+
+\title{Vanderbilt Open Problems List 2015}
+\author{}
+\begin{document}
+\maketitle
+%===============================================
+\section{Maltsev conditions}
+%===============================================
+
+
+\begin{question}[Matt Valeriote]
+  Is there a strong Maltsev condition for a difference term for finite
+algebras? If so, what is it?
+\end{question}
+\begin{context}
+  It is known~\cite{kearnes-szendrei-2-commutators} that having a difference term corresponds to a Maltsev condition.
+\end{context}
+
+\begin{question}[Ralph McKenzie]
+Let $V$ be a variety. Is it true that $V$ has a difference term if and only if
+for every $\algA\in V$ and ever every $\alpha,\beta\in \Con (\algA)$ with 
+$\alpha$ Abelian we have $\alpha\circ\beta=\beta\circ\alpha$?
+\end{question}
+\begin{question}[Ralph McKenzie]
+  Is there a $M$ strong Maltsev condition such that a variety $V$ has a Taylor
+term iff $V$ satisfies $M$?
+\end{question}
+
+\begin{question}[Ralph McKenzie]
+  Is there a $M$ strong Maltsev condition such that a variety $V$ is congruence
+  meet semidistributive (\SDmeet) iff $V$ satisfies $M$?
+\end{question}
+\begin{context}
+Both above questions have positive answers for locally finite varieties.
+\end{context}
+\begin{question}[Libor Barto]
+  Is congruence singularity (CS) characterized by a linear Maltsev condition
+for finitely generated varieties?
+\end{question}
+\begin{context}
+  CS means that for all (finite) $\algA\in V$ and all $\alpha,\beta\in \Con (\algA)$, we
+have
+\[
+\left|a/\alpha\wedge \beta \right|\cdot\left|a/\alpha\vee\beta \right|=
+ \left|a/\alpha\right|\cdot\left|a/\beta \right|.
+\]
+ 
+  CS is known to be a Maltsev condition for finitely generated varieties.
+\end{context}
+
+\begin{question}[Libor Barto]
+  Fill in the blanks: `` \dots $+$ finitely related = \dots''.
+\end{question}
+\begin{context}
+Two famous ways to fill in the blanks are 
+``CM $+$ finitely related = few subpowers'' and ``CD $+$ finitely related =
+NU''. Are there more?
+\end{context}
+\begin{question}[Libor Barto]
+Let $\algA$ be an algebra that is
+\begin{enumerate}[a)]
+\item idempotent and topologically closed (i.e.. if $f\colon A^n\to A$ is an
+operation such that for any finite $B\subset A$ we have a $g$ operation of
+$\algA$ such that $g_{|B}=f_{|B}$ then $f$ is also an operation of $\algA$), or
+\item oligomorphic (i.e. ) and topologically closed.
+\end{enumerate}
+If the 2-element naked set (no nontrivial
+idempotent operations) can be found in $HSP(\algA)$, can we find it in
+$HSP_{fin}(A)$? 
+\end{question}
+
+\begin{context}
+This double question is interesting for infinite algebras (it is known to be true for
+finite algebras). If having a Taylor term is not a strong Maltsev condition
+(which we don't know) then the answer to a) above is ``no''.
+
+Naked set is an algebra with no nontrivial (non-projection) idempotent
+operations.
+
+An algebra is oligomorphic if the following holds: Let $G$ be the group of all
+unary terms of $\algA$ for which there is an inverse term in $\algA$. Then for
+all $n\in\en$ the number of orbits of $G$ acting componentwise on $A^n$ is
+finite. One can't have an infinite algebra that would be
+oligomorphic and idempotent at the same time.
+
+In general, there are algebras that have the the 2-element naked set in
+ $HSP(\algA)$, but not in $HSP_{fin}(\algA)$.
+\end{context}
+\begin{question}[Alex Kazda]
+  Let $\algA$ be a finite 4-permutable algebra. Find an algorithm that solves
+$CSP(\algA)$ in polynomial time.
+\end{question}
+\begin{question}[Jakub Opršal]
+ Give a nice examples of 4-permutable finite algebras that are not congruence meet
+semidistributive, nor congruence modular.
+\end{question}
+\begin{question}[Alex Wires]
+  Let $\algA$ be a 3-permutable algebra. Find an algorithm for $\CSP(\algA)$
+that does not need to use the edge term.
+\end{question}
+\begin{question}[Ross Willard]
+  Does there exist a polynomial time algorithm that, given a $G$ finite
+bipartite graph would decide if $G$ has a set of Hagemann-Mitschke
+polymorphisms?
+\end{question}
+\begin{context}
+  Hagemann-Mitschke terms witness $n$-permutability ~\cite{hagemann-mitschke}.
+
+  The goal here is to generalize from bipartite graphs to general graphs and
+to do the same for congruence modularity.
+\end{context}
+
+\begin{question}[Jakub Opršal]
+  Is congruence modularity a linear meet of Maltsev and congruence
+distributivity?
+\end{question}
+\begin{context}
+The meet here is taken in the lattice of interpretability of linear Maltsev
+conditions. Meet of two Maltsev conditions is the strongest linear Maltsev
+condition implied by each of the two original conditions.
+\end{context}
+
+\begin{question}[Ross Willard]
+  Why are all interesting Maltsev conditions expressible in two variable
+equations?
+\end{question}
+\begin{question}[Libor Barto]
+  Which implications among Maltsev conditions can be extended from the locally
+finite to oligomorphic closed clones by way of oligomorphic adjustment by
+automorphisms (i.e. $t(x,y)=t(y,x)$ becomes $t(x,y)=\sigma
+t(\theta(y),\lambda(x))$)? Here $\sigma, \theta, \lambda$ belong to the group of all
+unary terms of $\algA$ for which there is an inverse term in $\algA$
+\end{question}
+\begin{context}
+  We prefer closed clones, because they precisely correspond to polymorphisms
+of relational structures.
+\end{context}
+\begin{question}[Matt Moore]
+  Which finite \SDmeet{} algebras are finitely related?
+\end{question}
+\begin{context}
+  We know that having a cube term is a sufficient condition here, but it is not
+necessary (consider the two element semilattice).
+\end{context}
+\begin{question}[Ralph Freese]
+ Let $V,W$ be idempotent congruence permutable varieties. Find 
+Hagemann-Mitschke terms and the cube term for the variety $V\circ W$ 
+(where $\circ$ denotes Maltsev product of varieties).
+\end{question}
+\begin{context}
+  It is known (\cite{freese-mckenzie-robust}) that if $V,W$ are idempotent congruence permutable
+  varieties then $V\circ W$ (join of varieties) is 3-permutable (it need not be permutable), but
+nobody knows how to write the Hagemann-Mitschke term for $V\circ W$ as a
+composition of Maltsev operations in $V,W$. 
+
+We also know that $V\circ W$ has a cube term since having a cube term (we don't
+need 3-permutability to prove this here since cube terms are robust with
+respect to $\circ$).
+\end{context}
+
+\begin{question}[Cliff Bergman]
+  Assume that $V,W$ are idempotent varieties and that $V\vee W$ (join of
+  varieties of the same type with respect to inclusion; \emph{not} with respect to
+  interpretability) is 3-permutable. Is it then true that $V\circ W$ is 3-permutable?
+\end{question}
+\begin{context}
+  It is known that for $V,W$ idempotent we have ``$V\vee W$ permutable
+$\Rightarrow$ $V\circ W$ permutable.''
+\end{context}
+
+\begin{question}[folklore]
+  Let $P$ be a finite bounded poset, let $\cal C$ be the clone of polymorphisms
+of $P$. Is it true that $\cal C$ is a finitely generated clone iff $\cal C$
+contains an NU?
+\end{question}
+\begin{context}
+``$\Leftarrow$'' is known by the Baker-Pixley theorem.
+
+Smallest poset without NU is the Tard\H{o}s' poset~\cite{tardos}. The clone of polymorphisms
+of that poset does not have NU and is not finitely generated.
+
+Also known is Larose and Zádori's characterization of posets admitting an
+NU~\cite{larose-zadori}.
+\end{context}
+
+\begin{question}[Matt Valeriote]\label{qLocal}
+  We say that a strong Maltsev condition $M$ is local for idempotent algebras
+  if there exists an $n$ such that for every idempotent $\algA$ if for every
+  $B\subset A$ of size at most $n$ there exist terms of $\algA$ that satisfy
+  $M$ for elements of $B$ then $\algA$ as a whole satisfies $M$.
+
+  Which strong Maltsev conditions are local for idempotent algebras?
+\end{question}
+\begin{context}
+  The only provably non-local strong Maltsev condition we have so far is
+  minority operation (see Question~\ref{qMinority}). On the other hand, we know
+  that Maltsev operation, $n$-permutability (Hagemann-Mitschke terms), $NU(k)$, cube term, 
+  $CD(k)$ and $CM(k)$ are local for
+  idempotent algebras. (Weak near unanimity of fixed arity is local if we
+  restrict ourselves to Taylor idempotent algebras.)
+\end{context}
+
+\begin{question}[Alex Kazda]\label{qMinority}
+  What is the computational complexity of deciding if $\algA$ finite idempotent
+  algebra given by tables of its basic operations has a minority operation?
+\end{question}
+\begin{context}
+  We know that having local minorities (see Question~\ref{qLocal}) 
+  is not enough thanks to Dmitriy Zhuk's example of idempotent 
+  algebras that have local minority operations (there is such an algebra for
+  each value of $n$) but no global minority.
+\end{context}
+
+%============================================
+\section{Clones}
+%============================================
+\begin{question}[Ross Willard] Ralph McKenzie provided
+  in~\cite{mckenzie-residual-bounds} an algebra
+  $\algA$ that has 4 elements, the variety generated by $\algA$ has residual
+  character $\omega$ and $\Clo \algA$ is not finitely generated. Decide if
+  $\Clo \algA$ is finitely related. (Guess: No.)
+\end{question}
+
+\begin{question}[Dmitriy Zhuk] Fix a base set $A$. Let $\mathcal E$ 
+  be the set of all clones on $A$ generated by a single edge operation. Let $C$
+  be an inclusion minimal member of $\mathcal E$. Is it true that $C$ is always
+  generated by a 4-ary edge operation?
+\end{question}
+\begin{context}
+  This is true when $|A|=2$.
+\end{context}
+
+\begin{question}[Dmitriy Zhuk]
+  Give complexity classification or practical algorithms that decide if two definitions give the same clone. Cases:
+  \begin{itemize}
+    \item Given two finite sets of operations $F_1, F_2$, decide if
+      $\Clo(F_1)=\Clo(F_2)$. (This is decidable.)
+    \item Given two finite relations $\rho_1, \rho_2$, decide if
+      $\Pol(\rho_1)=\Pol(\rho_2)$. (This is decidable.)
+    \item Given a finite relation $\rho$ and a finite set of operations $F$,
+      decide if $\Pol(\rho)=\Clo(F)$. (We don't know if this is even
+      decidable.)
+    \item Given three finite sets of operations $A, B, C$, decide if 
+      $\Clo(A)\cap \Clo(B)=\Clo(C)$. (We don't know if this is even
+      decidable.)
+  \end{itemize}
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Given a clone, decide how many clones contain this clone. Variants:
+\begin{itemize}
+    \item Given a finite set of operations $F$, decide how many clones contain
+      $\Clo(F)$. (Decidability unknown.)
+    \item Given an operation, decide how many clones contain this operation.
+      (Decidability unknown.)
+    \item Given a weak near unanimity operation, decide how many clones contain this operation.
+      (Decidability unknown.)
+    \item Given a Maltsev operation, decide how many clones contain this operation.
+      (Decidability unknown.)
+    \item Given a relation $\rho$, decide how many clones contain $\Pol(\rho)$.
+      (Decidability unknown.)
+  \end{itemize}
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Find out how many clones contain a given minimal clone on 4 elements.
+\end{question}
+\begin{context}
+All minimal clones on 4 elements were found (by combining results of 
+P\"oschel, Kaluzhnin, Szczepara, Waldhauser, Jezek, Quackenbush and Karsten
+Scholzer, the last from 2012)
+\end{context}
+\begin{question}[Dmitriy Zhuk]
+  Find all minimal clones that are contained only in \emph{finitely} many clones (i.e.
+  correspond to a finite principal filter in the clone lattice).
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Find all minimal clones that are contained only in \emph{countably} many clones (i.e.
+  correspond to a finite principal filter in the clone lattice).
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Decide if a clone is finitely generated. Cases:
+  \begin{itemize}
+    \item Given a relation $\rho$, decide if $\Pol(\rho)$ is finitely
+      generated. (Decidability unknown.)
+    \item As above, but assume that $\rho$ is a partial order relation with
+      greatest and least element. (Decidability unknown.)
+    \item As above, but also find the generating set for $\Pol(\rho)$.
+      (Decidability unknown.)
+    \item Given two sets of operations $B, C$, decide if $\Clo(B)\cap \Clo(C)$
+      is finitely generated. (Decidability unknown.)
+  \end{itemize}
+\end{question}
+\begin{context}
+  See~\cite{haddad} for finitely generated clones whose intersection is not
+  finitely generated.
+\end{context}
+
+\begin{question}[Dmitriy Zhuk]
+Given a clone by a set of operations:
+\begin{itemize}
+  \item  Decide whether the clone is finitely related. (Decidability unknown.) 
+  \item Find a relation that defines this clone. (Decidability unknown.)
+\end{itemize}
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Does there exist a minimal clone that is not finitely related?
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Does there exist a minimal clone on 3 elements that is not finitely
+  related?
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Given two finite sets of operations $C$ and $D$ such
+  that $C\subset D$ and the sublattice between two clones
+  $\Clo(C)$ and $\Clo(D)$ is finite, find this sublattice. (Decidability
+  unknown.)
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Does there exist a finite maximal chain of size greater than 52 on 3
+  elements?
+\end{question}
+\begin{question}[Dmitriy Zhuk]
+  Is it true that a finite maximal chain of the maximal size always
+  contains a minimal majority operation?
+\end{question}
+\begin{context}
+  The two above questions stem from the fact that there is a 52 element maximal
+  chain of clones on three elements with a minimal majority operation.
+\end{context}
+
+\begin{question}[Dmitriy Zhuk]
+  Is the size of a finite maximal chain of clones on $A$ finite bounded?
+\end{question}
+\begin{context}
+  The bound is 7 when $|A|=2$, we don't know for $|A|=3$.
+\end{context}
+
+\begin{question}[Dmitriy Zhuk]
+  Find a set of relations $\Gamma$ of arity at most $m$ such that any generating set
+  of $\Pol(\Gamma)$ has to contain an operation of arity greater than $|A|^m$ (or,
+  alternatively, $2^{2^m}$).
+\end{question}
+
+\begin{question}[Dmitriy Zhuk]
+  Find a set of operations $C$ of arity at most $m$ such that if
+  $\Clo(C)=\Pol(\Gamma)$ for some $\Gamma$ set of relations, then $\Gamma$
+  contains a relation of arity greater than $|A|^m$ (or, alternatively,
+  $2^{2^m}$).
+\end{question}
+
+
+%============================================
+\section{Commutators}
+%============================================
+\begin{question}[Alex Wires]
+Generalize results from commutator theory to the $n$-ary commutator by
+Bulatov~\cite{bulatov-on-the-number-of-maltsevs} (see Question~\ref{qSupernilpotent} for a concrete example of
+that).
+\end{question}
+
+\begin{question}[Alex Wires]\label{qSupernilpotent}
+  Fill in the blank: An algebra $\algA$ is supernilpotent if and only if
+  $\algA$ is polynomially equivalent to \dots
+\end{question}
+\begin{context}
+  One guess for the ``$\dots$'' above is ``affine algebra''. See the results on
+  2-supernilpotent algebras by Nebojsa Mudrinski~\cite{nebojsa}.
+\end{context}
+
+
+%============================================
+\section{Algorithmic topics}
+%============================================
+\begin{question}[Ross Willard]
+  Is the following decidable? Given $\algA$ finite algebra and $n\in \en$, are
+all subdirectly irreducible algebras in the variety generated by $\algA$ of
+cardinality at most $n$?
+\end{question}
+\begin{context}
+  The problem is decidable in the \SDmeet{} and CM cases (because then we can
+decide if $\algA$ has a finite residual bound).
+\end{context}
+\begin{question}[Matt Valeriote]
+  Find a strong idempotent nontrivial Maltsev condition $M$ such that deciding
+  if an algebra $\algA$ satisfies $M$ is provably \emph{not}
+  \compEXPTIME-complete. (Modulo reasonable computational complexity conjectures.)
+\end{question}
+\begin{context}
+  Maltsev (not always strong) conditions known to be \compEXPTIME-complete~\cite{freese-valeriote-complexity}:
+  \begin{itemize}
+    \item omitting type 1
+    \item omitting types 1 and 2
+    \item omitting types 1 and 5
+    \item omitting types 1, 2, and 5
+    \item having a semilattice operation
+    \item congruence modularity
+    \item congruence distributivity
+    \item having a chain of Jónsson terms of fixed length $n$
+  \end{itemize}
+
+  Deciding a strong Maltsev condition is in \compEXPTIME, because we can always
+  build up the $n$-generated free algebra (with $n$ corresponding to the
+  arities of operations in the Maltsev condition) in $V(\algA)$ and examine all its members.
+\end{context}
+\begin{question}[Matt Valeriote]
+  Given a general (not idempotent) algebra $\algA$, how hard is it to decide if
+  $\algA$:
+  \begin{enumerate}[a)]
+    \item has Maltsev operation,
+    \item has a majority operation,
+    \item has a Pixley operation,
+    \item is primal.
+  \end{enumerate}
+\end{question}
+\begin{question}[Matt Valeriote]
+  Find a strong idempotent nontrivial Maltsev condition $M$ such that deciding
+  if an \emph{idempotent} algebra $\algA$ satisfies $M$ is provably \emph{not}
+  in \compP{} (modulo reasonable computational complexity conjectures.), or show
+  that we can decide all such Maltsev conditions in polynomial time. 
+\end{question}
+\begin{context}
+  Maltsev (not always strong) conditions known to be in \compP{} for $\algA$
+  idempotent:
+  \begin{itemize}
+    \item  Jónsson terms (directed, undirected, with a fixed length of chain
+  or with a chain of any length)
+     \item Gumm terms (all variants)
+     \item Maltsev operation
+     \item $NU(k)$ for a fixed $k$ or any $k$
+     \item cube term of fixed dimension or any
+  dimension
+      \item Pixley term
+      \item Hagemann-Mitschke terms for fixed length of chain or any length of
+	chain
+      \item having some weak near
+	unanimity operation (this is due to Bulatov,
+	see~\cite[Theorem 6.3]{freese-valeriote-complexity} for an algorithm) 
+  and having a weak near unanimity of a fixed arity
+      \item having a flat semilattice operation (only two levels)
+  \end{itemize}
+
+  Complexity is open for (among others):
+  \begin{itemize}
+    \item semilattice operation (not linear, conjectured to be
+      \compEXPTIME-complete even for $\algA$ idempotent;
+      see~\cite{} for an
+      algebra with local semilattice operations, but no global semilattice)
+    \item minority (this is Question~\ref{qMinority})
+    \item Having totally symmetric idempotent operation of arity $k$ for $k$
+      fixed
+    \item omitting types 1 and 5
+    \item Day terms  (the last two should be easy do decide).
+  \end{itemize}
+\end{context}
+\begin{question}
+  What is the complexity of deciding if a given relational structure has a
+  Maltsev polymorphisms?
+\end{question}
+\begin{question}
+  How hard is it to tell if a relational structure has a Taylor polymorphism?
+\end{question}
+\begin{question}
+  How hard is it to tell if a relational structure has a semilattice
+  polymorphism?
+\end{question}
+%========================================
+\section{McKenzie-Wagner Circuits}
+%========================================
+In this section, $\algA^{+}$ is the algebra with the universe $2^\omega$ and basic
+operations $\cap$, $\cup$ (binary set operations), $+$, $\cdot$ (binary
+elementwise 
+arithmetics; for
+example $\{1,2\}+\{4,5\}=\{5,6,7\}$), ${}^{c}$ (complement) and constants 
+$\emptyset$, $\omega$, $\{0\}$, and $\{1\}$.
+
+The algebra $\algM$ is the minimum subalgebra of $\algA^{+}$, i.e. $\algM$ contains
+all sets we can describe using $\{\emptyset,\omega, \{0\},\{1\}\}$ and basic
+operations.
+
+$\algM$ has many interesting members: finite sets, cofinite sets, all primes,
+\dots
+\begin{question}[Cliff Bergman]
+  Does $\algM$ contain $\{u^2\colon u\in\omega\}$?
+\end{question}
+\begin{question}[Cliff Bergman]
+  Is the word problem in $\algM$ decidable? Or, to put it differently, can we
+  decide if a term of $\algM$ describes the empty set (problem EMPTY)?
+\end{question}
+\begin{context}
+  (Pierre) McKenzie and Wagner have shown that EMPTY is \compNEXPTIME-hard, and
+  \compNEXPTIME-complete when we leave out the complement operation.
+
+  Among instances of EMPTY is the Goldbach conjecture.
+\end{context}
+\bibliographystyle{plain}
+\bibliography{citations}
+
+\end{document}
