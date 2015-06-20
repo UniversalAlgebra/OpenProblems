@@ -114,7 +114,6 @@ for more details.
    the checkout and merge steps above replacing `master` with another branch name.
 
 ## Bugs and Other Issues
-If you think you found a bug in the calculator, if you encounter a problem with
-the instructions on this page, or if you have any other issue that you'd like to
-call attention to, please
+If you encounter a problem with the instructions on this page, or if you have
+any other issue that you'd like to call attention to, please
 [create a new issue](https://github.com/UniversalAlgebra/OpenProblems/issues).
